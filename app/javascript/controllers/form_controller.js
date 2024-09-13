@@ -15,6 +15,10 @@ export default class extends Controller {
     event.preventDefault()
   }
 
+  select(event) {
+    event.target.select()
+  }
+
   showPicker(event) {
     if ("showPicker" in HTMLInputElement.prototype) {
       event.target.showPicker()
