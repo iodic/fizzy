@@ -8,7 +8,11 @@ class Users::PushSubscriptionsController < ApplicationController
     if subscription = @push_subscriptions.find_by(push_subscription_params)
       subscription.touch
     else
-      @push_subscriptions.create! push_subscription_params.merge(user_agent: request.user_agent)
+      subscription = @push_subscriptions.new(push_subscription_params.merge(user_agent: request.user_agent))
+
+      unless subscription.save
+        return render json: { errors: subscription.errors.full_messages }, status: :unprocessable_entity
+      end
     end
 
     head :ok

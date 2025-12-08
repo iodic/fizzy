@@ -23,9 +23,9 @@ class Card::Eventable::SystemCommenter
       when "card_reopened"
         "<strong>Reopened</strong> by #{event.creator.name}"
       when "card_postponed"
-        "#{event.creator.name} <strong>moved</strong> this to “Not Now”"
+        "#{event.creator.name} <strong>moved</strong> this to “Backlog”"
       when "card_auto_postponed"
-        "<strong>Moved</strong> to “Not Now” due to inactivity"
+        "<strong>Moved</strong> to “Backlog” due to inactivity"
       when "card_title_changed"
         "#{event.creator.name} <strong>changed the title</strong> from “#{event.particulars.dig('particulars', 'old_title')}” to “#{event.particulars.dig('particulars', 'new_title')}”."
       when "card_board_changed"
@@ -33,7 +33,7 @@ class Card::Eventable::SystemCommenter
       when "card_triaged"
         "#{event.creator.name} <strong>moved</strong> this to “#{event.particulars.dig('particulars', 'column')}”"
       when "card_sent_back_to_triage"
-        "#{event.creator.name} <strong>moved</strong> this back to “Maybe?”"
+        "#{event.creator.name} <strong>moved</strong> this back to “To Do”"
       end
     end
 end

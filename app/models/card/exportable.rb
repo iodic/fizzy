@@ -75,11 +75,11 @@ module Card::Exportable
       when closed?
         "Done"
       when postponed?
-        "Not now"
+        "Backlog"
       when column.present?
         column.name
       else
-        "Maybe?"
+        "To Do"
       end
     end
 end

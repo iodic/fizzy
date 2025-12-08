@@ -7,7 +7,7 @@
     <div class="cards__expander btn btn--plain" style="--card-count: <%= board.cards.postponed.count %>">
       <span class="cards__expander-count"><%= board.cards.postponed.count %></span>
       <h2 class="cards__expander-title">
-        Not Now
+        Backlog
       </h2>
     </div>
   <% end %>
@@ -16,7 +16,7 @@
     <div class="cards__expander btn btn--plain" style="--card-count: <%= board.cards.awaiting_triage.count %>">
       <span class="cards__expander-count"><%= board.cards.awaiting_triage.count %></span>
       <h2 class="cards__expander-title">
-        Maybe?
+        To Do
       </h2>
     </div>
   <% end %>

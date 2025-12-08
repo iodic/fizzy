@@ -73,10 +73,10 @@ class Account::Seeder
         <action-text-attachment url="https://videos.37signals.com/fizzy/assets/images/make-columns.gif" alt="Demo of adding columns" caption="Make two more columns" content-type="image/*" filename="make-columns.gif" presentation="gallery"></action-text-attachment>
       HTML
 
-      playground.cards.create! creator: creator, title: "Second, move this card to NOT NOW", status: "published", description: <<~HTML
-        <p>You can either select “NOT NOW” over in the sidebar, or you can go back out to the board view and drag this card into the “NOT NOW” column on the left side.</p>
+      playground.cards.create! creator: creator, title: "Second, move this card to BACKLOG", status: "published", description: <<~HTML
+        <p>You can either select “BACKLOG” over in the sidebar, or you can go back out to the board view and drag this card into the “BACKLOG” column on the left side.</p>
         <p><br></p>
-        <action-text-attachment url="https://videos.37signals.com/fizzy/assets/images/not-now.gif" alt="Demo of moving a card to Not Now" caption="Move to Not Now" content-type="image/*" filename="not-now.gif" presentation="gallery"></action-text-attachment>
+        <action-text-attachment url="https://videos.37signals.com/fizzy/assets/images/not-now.gif" alt="Demo of moving a card to Backlog" caption="Move to Backlog" content-type="image/*" filename="not-now.gif" presentation="gallery"></action-text-attachment>
       HTML
 
       playground.cards.create! creator: creator, title: "First, rename this card", status: "published", description: <<~HTML

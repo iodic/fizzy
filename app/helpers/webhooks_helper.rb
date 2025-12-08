@@ -9,9 +9,9 @@ module WebhooksHelper
     card_triaged: "Card column changed",
     card_closed: "Card moved to “Done”",
     card_reopened: "Card reopened",
-    card_postponed: "Card moved to “Not Now”",
-    card_auto_postponed: "Card moved to “Not Now” due to inactivity",
-    card_sent_back_to_triage: "Card moved back to “Maybe?”"
+    card_postponed: "Card moved to “Backlog”",
+    card_auto_postponed: "Card moved to “Backlog” due to inactivity",
+    card_sent_back_to_triage: "Card moved back to “To Do”"
   }.with_indifferent_access.freeze
 
   def webhook_action_options(actions = Webhook::PERMITTED_ACTIONS)

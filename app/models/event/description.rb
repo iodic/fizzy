@@ -62,9 +62,9 @@ class Event::Description
       when "card_reopened"
         "#{creator} reopened #{card_title}"
       when "card_postponed"
-        %(#{creator} moved #{card_title} to "Not Now")
+        %(#{creator} moved #{card_title} to "Backlog")
       when "card_auto_postponed"
-        %(#{card_title} moved to "Not Now" due to inactivity)
+        %(#{card_title} moved to "Backlog" due to inactivity)
       when "card_resumed"
         "#{creator} resumed #{card_title}"
       when "card_title_changed"
@@ -74,7 +74,7 @@ class Event::Description
       when "card_triaged"
         triaged_sentence(creator, card_title)
       when "card_sent_back_to_triage"
-        %(#{creator} moved #{card_title} back to "Maybe?")
+        %(#{creator} moved #{card_title} back to "To Do")
       end
     end
 

@@ -9,7 +9,7 @@ writebook_triage:
 
 writebook_in_progress:
   id: <%= ActiveRecord::FixtureSet.identify("writebook_in_progress", :uuid) %>
-  name: In progress
+  name: In Progress
   color: "var(--color-card-2)"
   board: writebook_uuid
   position: 1
@@ -25,7 +25,7 @@ writebook_on_hold:
 
 writebook_review:
   id: <%= ActiveRecord::FixtureSet.identify("writebook_review", :uuid) %>
-  name: Review
+  name: In Review
   color: "var(--color-card-3)"
   board: writebook_uuid
   position: 3

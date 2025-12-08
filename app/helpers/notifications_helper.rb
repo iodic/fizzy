@@ -15,12 +15,12 @@ module NotificationsHelper
     when "card_published" then "Added by #{creator}"
     when "card_closed" then "Moved to Done by #{creator}"
     when "card_reopened" then "Reopened by #{creator}"
-    when "card_postponed" then "Moved to Not Now by #{creator}"
-    when "card_auto_postponed" then "Moved to Not Now due to inactivity"
+    when "card_postponed" then "Moved to Backlog by #{creator}"
+    when "card_auto_postponed" then "Moved to Backlog due to inactivity"
     when "card_title_changed" then "Renamed by #{creator}"
     when "card_board_changed" then "Moved by #{creator}"
     when "card_triaged" then "Moved to #{event.particulars.dig("particulars", "column")} by #{creator}"
-    when "card_sent_back_to_triage" then "Moved back to Maybe? by #{creator}"
+    when "card_sent_back_to_triage" then "Moved back to To Do by #{creator}"
     when "comment_created" then comment_notification_body(event)
     else creator
     end

@@ -22,7 +22,7 @@ class Boards::ColumnsControllerTest < ActionDispatch::IntegrationTest
   test "update" do
     column = columns(:writebook_in_progress)
 
-    assert_changes -> { column.reload.name }, from: "In progress", to: "Updated Name" do
+    assert_changes -> { column.reload.name }, from: "In Progress", to: "Updated Name" do
       put board_column_path(boards(:writebook), column), params: { column: { name: "Updated Name" } }, as: :turbo_stream
       assert_response :success
     end
