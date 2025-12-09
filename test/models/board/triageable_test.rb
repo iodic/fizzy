@@ -7,5 +7,6 @@ class Board::TriageableTest < ActiveSupport::TestCase
     end
 
     assert_equal Board::Triageable::DEFAULT_COLUMN_NAMES, board.columns.sorted.pluck(:name)
+    assert_equal Board::Triageable::DEFAULT_COLUMNS.values, board.columns.sorted.map { |column| column[:color] }
   end
 end

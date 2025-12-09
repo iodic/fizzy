@@ -1,10 +1,12 @@
 module Board::Triageable
   extend ActiveSupport::Concern
 
-  DEFAULT_COLUMN_NAMES = [
-    "In Progress",
-    "In Review"
-  ].freeze
+  DEFAULT_COLUMNS = {
+    "In Progress" => "var(--color-card-3)",
+    "In Review" => "var(--color-card-8)"
+  }.freeze
+
+  DEFAULT_COLUMN_NAMES = DEFAULT_COLUMNS.keys.freeze
 
   included do
     has_many :columns, dependent: :destroy
@@ -16,8 +18,8 @@ module Board::Triageable
     def create_default_columns
       return if columns.exists?
 
-      DEFAULT_COLUMN_NAMES.each do |name|
-        columns.create!(name: name)
+      DEFAULT_COLUMNS.each do |name, color|
+        columns.create!(name: name, color: color)
       end
     end
 end
