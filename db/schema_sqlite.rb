@@ -347,6 +347,28 @@ ActiveRecord::Schema[8.2].define(version: 2025_12_05_010536) do
     t.index ["source_type", "source_id"], name: "index_mentions_on_source"
   end
 
+  create_table "note_accesses", id: :uuid, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.uuid "note_id", null: false
+    t.datetime "updated_at", null: false
+    t.uuid "user_id", null: false
+    t.index ["note_id", "user_id"], name: "index_note_accesses_on_note_id_and_user_id", unique: true
+    t.index ["user_id"], name: "index_note_accesses_on_user_id"
+  end
+
+  create_table "notes", id: :uuid, force: :cascade do |t|
+    t.uuid "account_id", null: false
+    t.uuid "board_id", null: false
+    t.datetime "created_at", null: false
+    t.string "title", limit: 255, null: false
+    t.datetime "updated_at", null: false
+    t.uuid "user_id", null: false
+    t.index ["account_id"], name: "index_notes_on_account_id"
+    t.index ["board_id"], name: "index_notes_on_board_id"
+    t.index ["updated_at"], name: "index_notes_on_updated_at"
+    t.index ["user_id"], name: "index_notes_on_user_id"
+  end
+
   create_table "notification_bundles", id: :uuid, force: :cascade do |t|
     t.uuid "account_id", null: false
     t.datetime "created_at", null: false

@@ -1,0 +1,17 @@
+writebook_credentials:
+  id: <%= ActiveRecord::FixtureSet.identify("writebook_credentials", :uuid) %>
+  account: 37s_uuid
+  board: writebook_uuid
+  user: david_uuid
+  title: Production credentials
+  created_at: <%= 2.days.ago %>
+  updated_at: <%= 1.day.ago %>
+
+writebook_guidelines:
+  id: <%= ActiveRecord::FixtureSet.identify("writebook_guidelines", :uuid) %>
+  account: 37s_uuid
+  board: writebook_uuid
+  user: kevin_uuid
+  title: Editorial guidelines
+  created_at: <%= 3.days.ago %>
+  updated_at: <%= 3.days.ago %>

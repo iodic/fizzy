@@ -37,6 +37,7 @@ Rails.application.routes.draw do
 
       resources :columns
       resources :time_entries, only: %i[index create]
+      resources :notes
     end
 
     resources :cards, only: :create

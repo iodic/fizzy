@@ -1,0 +1,26 @@
+<% @page_title = "#{@note.title} · #{@board.name}" %>
+
+<% content_for :header do %>
+  <div class="header__actions header__actions--start">
+    <%= link_to "All notes", board_notes_path(@board), class: "btn btn--back" %>
+  </div>
+
+  <h1 class="header__title divider divider--fade full-width">
+    <span class="overflow-ellipsis"><%= @note.title %></span>
+  </h1>
+
+  <div class="header__actions header__actions--end">
+    <%= link_to "Edit", edit_board_note_path(@board, @note), class: "btn" %>
+    <%= button_to "Delete", board_note_path(@board, @note), method: :delete,
+          class: "btn btn--negative",
+          form: { data: { turbo_confirm: "Delete this note? This cannot be undone." } } %>
+  </div>
+<% end %>
+
+<article class="panel flex-column gap rich-text">
+  <div class="txt-x-small txt-muted">
+    Updated <%= l @note.updated_at, format: :long %> by <%= @note.user.name %>
+  </div>
+
+  <%= @note.body %>
+</article>

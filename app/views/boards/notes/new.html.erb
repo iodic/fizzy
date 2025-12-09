@@ -1,0 +1,15 @@
+<% @page_title = "New note · #{@board.name}" %>
+
+<% content_for :header do %>
+  <div class="header__actions header__actions--start">
+    <%= link_to "All notes", board_notes_path(@board), class: "btn btn--back" %>
+  </div>
+
+  <h1 class="header__title divider divider--fade full-width">
+    <span class="overflow-ellipsis">New note</span>
+  </h1>
+<% end %>
+
+<section class="panel flex-column gap">
+  <%= render "form", board: @board, note: @note %>
+</section>

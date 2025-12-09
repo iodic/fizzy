@@ -1,0 +1,39 @@
+<%= form_with model: [ @board, @note ], class: "flex flex-column gap" do |form| %>
+  <% if @note.errors.any? %>
+    <div class="alert alert--error">
+      <ul class="margin-none">
+        <% @note.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="flex flex-column gap-quarter">
+    <%= form.label :title, class: "txt-small font-weight-semibold" %>
+    <%= form.text_field :title, class: "input", autofocus: true %>
+  </div>
+
+  <div class="flex flex-column gap-quarter rich-text">
+    <%= form.label :body, "Content", class: "txt-small font-weight-semibold" %>
+    <%= form.rich_text_area :body, class: "input" %>
+  </div>
+
+  <div class="flex flex-column gap-half">
+    <span class="txt-small font-weight-semibold">Visible to</span>
+    <%= hidden_field_tag "note[viewer_ids][]", "" %>
+    <div class="flex flex-column gap-quarter">
+      <% @available_users.each do |user| %>
+        <label class="flex align-center gap-half txt-small">
+          <%= check_box_tag "note[viewer_ids][]", user.id, (@selected_user_ids || []).include?(user.id.to_s) %>
+          <span><%= user.name %></span>
+        </label>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="flex gap">
+    <%= form.submit class: "btn btn--link" %>
+    <%= link_to "Cancel", @note.persisted? ? board_note_path(@board, @note) : board_notes_path(@board), class: "btn" %>
+  </div>
+<% end %>

@@ -1,0 +1,9 @@
+writebook_credentials_david:
+  id: <%= ActiveRecord::FixtureSet.identify("writebook_credentials_david_access", :uuid) %>
+  note: writebook_credentials_uuid
+  user: david_uuid
+
+writebook_guidelines_kevin:
+  id: <%= ActiveRecord::FixtureSet.identify("writebook_guidelines_kevin_access", :uuid) %>
+  note: writebook_guidelines_uuid
+  user: kevin_uuid

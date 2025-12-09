@@ -18,3 +18,17 @@ layout_overflowing_david:
   record: layout_overflowing_david_uuid (Comment)
   name: body
   body: The text is overflowing the container.
+
+writebook_credentials_body:
+  id: <%= ActiveRecord::FixtureSet.identify("writebook_credentials_body_rich_text", :uuid) %>
+  account: 37s_uuid
+  record: writebook_credentials_uuid (Note)
+  name: body
+  body: "<div>VPN: vpn.example.com<br>Username: writebook<br>Password: •••</div>"
+
+writebook_guidelines_body:
+  id: <%= ActiveRecord::FixtureSet.identify("writebook_guidelines_body_rich_text", :uuid) %>
+  account: 37s_uuid
+  record: writebook_guidelines_uuid (Note)
+  name: body
+  body: "<div><p>Keep the voice friendly and concise.</p></div>"

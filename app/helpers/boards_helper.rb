@@ -14,4 +14,10 @@ module BoardsHelper
       icon_tag("clock") + tag.span("Time tracking for #{board.name}", class: "for-screen-reader")
     end
   end
+
+  def link_to_board_notes(board)
+    link_to board_notes_path(board), class: "btn", data: { controller: "tooltip" } do
+      icon_tag("clipboard") + tag.span("Notes for #{board.name}", class: "for-screen-reader")
+    end
+  end
 end

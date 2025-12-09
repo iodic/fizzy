@@ -1,0 +1,39 @@
+<% @page_title = "#{@board.name} · Notes" %>
+
+<% content_for :header do %>
+  <div class="header__actions header__actions--start">
+    <%= link_back_to_board(@board) %>
+  </div>
+
+  <h1 class="header__title divider divider--fade full-width">
+    <span class="overflow-ellipsis">Notes</span>
+  </h1>
+
+  <div class="header__actions header__actions--end">
+    <%= link_to "New note", new_board_note_path(@board), class: "btn btn--primary" %>
+  </div>
+<% end %>
+
+<section class="panel flex-column gap">
+  <% if @notes.any? %>
+    <ul class="list--unstyled flex-column gap">
+      <% @notes.each do |note| %>
+        <li class="card flex-column gap">
+          <div class="flex justify-space-between align-center">
+            <h2 class="txt-large font-weight-semibold margin-none">
+              <%= link_to note.title, board_note_path(@board, note), class: "link--subtle" %>
+            </h2>
+            <div class="txt-x-small txt-muted">
+              Updated <%= l note.updated_at, format: :short %> by <%= note.user.name %>
+            </div>
+          </div>
+          <div class="txt-small txt-muted overflow-hidden rich-text">
+            <%= truncate(strip_tags(note.body.to_s), length: 180) %>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p class="txt-muted margin-none">No notes yet. Create one to capture project context.</p>
+  <% end %>
+</section>
