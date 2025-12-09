@@ -11,9 +11,9 @@
 <% end %>
 
 <section class="panel flex-column gap">
-  <h2 class="txt-large font-weight-semibold margin-none">Log time</h2>
+  <h2 class="txt-large font-weight-semibold margin-none"><%= @editing_entry ? "Edit time entry" : "Log time" %></h2>
 
-  <%= form_with model: [ @board, @time_entry ], class: "flex flex-column gap" do |form| %>
+  <%= form_with model: [ @board, @editing_entry || @time_entry ], class: "flex flex-column gap" do |form| %>
     <% if @time_entry.errors.any? %>
       <div class="alert alert--error">
         <ul class="margin-none">
@@ -49,8 +49,11 @@
       <%= form.text_area :description, rows: 3, class: "input" %>
     </div>
 
-    <div>
-      <%= form.submit "Log time", class: "btn btn--primary" %>
+    <div class="flex gap">
+      <%= form.submit (@editing_entry ? "Update" : "Log time"), class: "btn btn--link" %>
+      <% if @editing_entry %>
+        <%= link_to "Cancel", board_time_entries_path(@board), class: "btn btn--link" %>
+      <% end %>
     </div>
   <% end %>
 </section>
@@ -67,15 +70,23 @@
             <div class="txt-small font-weight-semibold"><%= number_with_precision(entry.hours, precision: 2, strip_insignificant_zeros: true) %>h</div>
           </div>
           <div class="txt-small"><%= simple_format(entry.description, {}, wrapper_tag: "p") %></div>
-          <div class="flex justify-space-between txt-x-small txt-muted">
-            <div>
+          <div class="flex justify-space-between txt-x-small txt-muted align-center">
+            <div class="flex align-center gap">
               <% if entry.card %>
                 <%= link_to "##{entry.card.number} · #{entry.card.title.presence || "Untitled"}", entry.card, class: "link--subtle" %>
               <% else %>
                 Not linked to a card
               <% end %>
             </div>
-            <div><%= l entry.created_at, format: :short %></div>
+            <div class="flex align-center gap">
+              <span><%= l entry.created_at, format: :short %></span>
+              <% if entry.user == Current.user || Current.user.can_administer_board?(@board) %>
+                <%= link_to "Edit", edit_board_time_entry_path(@board, entry), class: "btn btn--link txt-x-small" %>
+                <%= button_to "Delete", board_time_entry_path(@board, entry), method: :delete,
+                      class: "btn txt-x-small txt-negative",
+                      form: { data: { turbo_confirm: "Delete this time entry?" } } %>
+              <% end %>
+            </div>
           </div>
         </li>
       <% end %>

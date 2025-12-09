@@ -36,7 +36,7 @@ Rails.application.routes.draw do
       end
 
       resources :columns
-      resources :time_entries, only: %i[index create]
+      resources :time_entries, only: %i[index create edit update destroy]
       resources :notes
     end
 
