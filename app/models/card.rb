@@ -53,6 +53,10 @@ class Card < ApplicationRecord
     self
   end
 
+  validates :estimate_hours,
+    numericality: { greater_than_or_equal_to: 0 },
+    allow_nil: true
+
   def to_param
     number.to_s
   end

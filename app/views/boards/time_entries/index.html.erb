@@ -50,7 +50,7 @@
     </div>
 
     <div class="flex gap">
-      <%= form.submit (@editing_entry ? "Update" : "Log time"), class: "btn btn--link" %>
+      <%= form.submit (@editing_entry ? "Update" : "Log time"), class: "btn btn--primary" %>
       <% if @editing_entry %>
         <%= link_to "Cancel", board_time_entries_path(@board), class: "btn btn--link" %>
       <% end %>
@@ -83,7 +83,7 @@
               <% if entry.user == Current.user || Current.user.can_administer_board?(@board) %>
                 <%= link_to "Edit", edit_board_time_entry_path(@board, entry), class: "btn btn--link txt-x-small" %>
                 <%= button_to "Delete", board_time_entry_path(@board, entry), method: :delete,
-                      class: "btn txt-x-small txt-negative",
+                      class: "btn btn--link txt-x-small txt-negative",
                       form: { data: { turbo_confirm: "Delete this time entry?" } } %>
               <% end %>
             </div>

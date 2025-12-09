@@ -206,6 +206,7 @@ ActiveRecord::Schema[8.2].define(version: 2025_12_05_010536) do
     t.datetime "created_at", null: false
     t.uuid "creator_id", null: false
     t.date "due_on"
+    t.decimal "estimate_hours", precision: 6, scale: 2
     t.datetime "last_active_at", null: false
     t.bigint "number", null: false
     t.string "status", limit: 255, default: "drafted", null: false
@@ -215,6 +216,7 @@ ActiveRecord::Schema[8.2].define(version: 2025_12_05_010536) do
     t.index ["account_id", "number"], name: "index_cards_on_account_id_and_number", unique: true
     t.index ["board_id"], name: "index_cards_on_board_id"
     t.index ["column_id"], name: "index_cards_on_column_id"
+    t.index ["estimate_hours"], name: "index_cards_on_estimate_hours"
   end
 
   create_table "closers_filters", id: false, force: :cascade do |t|

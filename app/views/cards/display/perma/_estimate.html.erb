@@ -1,0 +1,21 @@
+<section class="card__estimate margin-block-start">
+  <%= form_with model: card, url: card_path(card), method: :patch, class: "flex flex-column gap-quarter", data: { controller: "form" } do |form| %>
+    <div class="flex align-center gap">
+      <%= form.label :estimate_hours, "Estimated hours", class: "txt-small font-weight-semibold margin-none" %>
+      <%= form.number_field :estimate_hours,
+            value: card.estimate_hours&.to_f,
+            step: 0.5,
+            min: 0,
+            class: "input input--small" %>
+      <%= form.submit "Save", class: "btn btn--link txt-small" %>
+    </div>
+
+    <div class="txt-x-small txt-muted">
+      <% if card.estimate_hours.present? && card.estimate_hours.positive? %>
+        Currently estimated at <%= number_with_precision(card.estimate_hours, precision: 2, strip_insignificant_zeros: true) %> hours.
+      <% else %>
+        No estimate yet. Use 0.5 increments when needed.
+      <% end %>
+    </div>
+  <% end %>
+</section>

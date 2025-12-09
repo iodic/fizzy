@@ -163,4 +163,11 @@ class CardTest < ActiveSupport::TestCase
 
     assert_not Card.new.filled?
   end
+
+  test "estimate hours must be non-negative" do
+    card = cards(:logo)
+    assert card.update(estimate_hours: 4)
+    assert_not card.update(estimate_hours: -1)
+    assert_includes card.errors[:estimate_hours], "must be greater than or equal to 0"
+  end
 end

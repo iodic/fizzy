@@ -20,7 +20,6 @@ class Boards::TimeEntriesController < ApplicationController
 
   def edit
     prepare_time_tracking
-    @time_entry.assign_attributes(hours: @time_entry.hours.to_f)
     @editing_entry = @time_entry
     render :index
   end

@@ -51,6 +51,7 @@ class CardsControllerTest < ActionDispatch::IntegrationTest
         title: "Logo needs to change",
         image: fixture_file_upload("moon.jpg", "image/jpeg"),
         description: "Something more in-depth",
+        estimate_hours: 6.5,
         tag_ids: [ tags(:mobile).id ] } }
     assert_response :success
 
@@ -60,6 +61,7 @@ class CardsControllerTest < ActionDispatch::IntegrationTest
     assert_equal [ tags(:mobile) ], card.tags
 
     assert_equal "Something more in-depth", card.description.to_plain_text.strip
+    assert_equal BigDecimal("6.5"), card.estimate_hours
   end
 
   test "users can only see cards in boards they have access to" do
