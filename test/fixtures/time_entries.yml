@@ -1,0 +1,20 @@
+writebook_design_review:
+  id: <%= ActiveRecord::FixtureSet.identify("writebook_design_review", :uuid) %>
+  account: 37s_uuid
+  board: writebook_uuid
+  user: david_uuid
+  card: layout_uuid
+  hours: 1.50
+  description: Design review meeting
+  created_at: <%= 1.day.ago %>
+  updated_at: <%= 1.day.ago %>
+
+writebook_research:
+  id: <%= ActiveRecord::FixtureSet.identify("writebook_research", :uuid) %>
+  account: 37s_uuid
+  board: writebook_uuid
+  user: kevin_uuid
+  hours: 2.00
+  description: Product research
+  created_at: <%= 2.days.ago %>
+  updated_at: <%= 2.days.ago %>

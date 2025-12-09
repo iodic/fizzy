@@ -1,0 +1,54 @@
+<section class="card card--time-tracking flex-column gap">
+  <header>
+    <h2 class="txt-small font-weight-semibold margin-none">Time tracking</h2>
+  </header>
+
+  <div>
+    <%= form_with model: [ @card, @time_entry ], class: "flex flex-column gap" do |form| %>
+      <% if @time_entry.errors.any? %>
+        <div class="alert alert--error">
+          <ul class="margin-none txt-x-small">
+            <% @time_entry.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="grid gap" style="grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));">
+        <div class="flex flex-column gap-quarter">
+          <%= form.label :hours, "Time (hours)", class: "txt-x-small font-weight-semibold" %>
+          <%= form.number_field :hours, step: 0.5, min: 0.5, class: "input" %>
+        </div>
+      </div>
+
+      <div class="flex flex-column gap-quarter">
+        <%= form.label :description, class: "txt-x-small font-weight-semibold" %>
+        <%= form.text_area :description, rows: 2, class: "input" %>
+      </div>
+
+      <div>
+        <%= form.submit "Log time", class: "btn btn--primary btn--small" %>
+      </div>
+    <% end %>
+
+    <% if @time_entries.any? %>
+      <ul class="list--unstyled flex-column gap-half margin-block-start">
+        <% @time_entries.each do |entry| %>
+          <li class="flex justify-space-between align-start gap">
+            <div>
+              <div class="txt-x-small font-weight-semibold"><%= entry.user.name %></div>
+              <div class="txt-x-small txt-muted"><%= l entry.created_at, format: :short %></div>
+            </div>
+            <div class="text-end">
+              <div class="txt-x-small font-weight-semibold"><%= number_with_precision(entry.hours, precision: 2, strip_insignificant_zeros: true) %>h</div>
+              <div class="txt-x-small"><%= simple_format(entry.description) %></div>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p class="txt-x-small txt-muted margin-block-start">No time logged for this card.</p>
+    <% end %>
+  </div>
+</section>

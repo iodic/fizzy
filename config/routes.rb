@@ -36,6 +36,7 @@ Rails.application.routes.draw do
       end
 
       resources :columns
+      resources :time_entries, only: %i[index create]
     end
 
     resources :cards, only: :create
@@ -87,6 +88,7 @@ Rails.application.routes.draw do
       resources :assignments
       resources :steps
       resources :taggings
+      resources :time_entries, only: %i[index create]
 
       resources :comments do
         resources :reactions, module: :comments

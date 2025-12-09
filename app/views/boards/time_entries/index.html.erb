@@ -1,0 +1,86 @@
+<% @page_title = "#{@board.name} · Time Tracking" %>
+
+<% content_for :header do %>
+  <div class="header__actions header__actions--start">
+    <%= link_back_to_board(@board) %>
+  </div>
+
+  <h1 class="header__title divider divider--fade full-width">
+    <span class="overflow-ellipsis">Time tracking</span>
+  </h1>
+<% end %>
+
+<section class="panel flex-column gap">
+  <h2 class="txt-large font-weight-semibold margin-none">Log time</h2>
+
+  <%= form_with model: [ @board, @time_entry ], class: "flex flex-column gap" do |form| %>
+    <% if @time_entry.errors.any? %>
+      <div class="alert alert--error">
+        <ul class="margin-none">
+          <% @time_entry.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="grid gap" style="grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));">
+      <div class="flex flex-column gap-quarter">
+        <%= form.label :user_id, "User", class: "txt-small font-weight-semibold" %>
+        <%= form.select :user_id,
+            options_from_collection_for_select(@user_options, :id, :name, @time_entry.user_id),
+            {},
+            class: "input" %>
+      </div>
+
+      <div class="flex flex-column gap-quarter">
+        <%= form.label :hours, "Time (hours)", class: "txt-small font-weight-semibold" %>
+        <%= form.number_field :hours, step: 0.5, min: 0.5, class: "input" %>
+      </div>
+
+      <div class="flex flex-column gap-quarter">
+        <%= form.label :card_id, "Related card", class: "txt-small font-weight-semibold" %>
+        <%= form.select :card_id, options_for_select(@card_options, @time_entry.card_id), { include_blank: "— None —" }, class: "input" %>
+      </div>
+    </div>
+
+    <div class="flex flex-column gap-quarter">
+      <%= form.label :description, class: "txt-small font-weight-semibold" %>
+      <%= form.text_area :description, rows: 3, class: "input" %>
+    </div>
+
+    <div>
+      <%= form.submit "Log time", class: "btn btn--primary" %>
+    </div>
+  <% end %>
+</section>
+
+<section class="panel flex-column gap">
+  <h2 class="txt-large font-weight-semibold margin-none">Time entries</h2>
+
+  <% if @time_entries.any? %>
+    <ul class="list--unstyled flex-column gap">
+      <% @time_entries.each do |entry| %>
+        <li class="card flex-column gap-quarter">
+          <div class="flex justify-space-between">
+            <div class="txt-small font-weight-semibold"><%= entry.user.name %></div>
+            <div class="txt-small font-weight-semibold"><%= number_with_precision(entry.hours, precision: 2, strip_insignificant_zeros: true) %>h</div>
+          </div>
+          <div class="txt-small"><%= simple_format(entry.description, {}, wrapper_tag: "p") %></div>
+          <div class="flex justify-space-between txt-x-small txt-muted">
+            <div>
+              <% if entry.card %>
+                <%= link_to "##{entry.card.number} · #{entry.card.title.presence || "Untitled"}", entry.card, class: "link--subtle" %>
+              <% else %>
+                Not linked to a card
+              <% end %>
+            </div>
+            <div><%= l entry.created_at, format: :short %></div>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p class="txt-muted margin-none">No time tracked yet.</p>
+  <% end %>
+</section>

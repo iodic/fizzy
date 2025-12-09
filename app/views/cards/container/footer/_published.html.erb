@@ -13,3 +13,5 @@
 </div>
 
 <%= render "cards/container/closure", card: card %>
+
+<%= turbo_frame_tag dom_id(card, :time_entries), src: card_time_entries_path(card), loading: :lazy %>

@@ -13,6 +13,7 @@ class User < ApplicationRecord
   has_many :pins, dependent: :destroy
   has_many :pinned_cards, through: :pins, source: :card
   has_many :exports, class_name: "Account::Export", dependent: :destroy
+  has_many :time_entries, dependent: :destroy
 
   scope :with_avatars, -> { preload(:account, :avatar_attachment) }
 

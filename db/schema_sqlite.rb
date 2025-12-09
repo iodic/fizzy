@@ -479,6 +479,22 @@ ActiveRecord::Schema[8.2].define(version: 2025_12_05_010536) do
     t.index ["account_id", "title"], name: "index_tags_on_account_id_and_title", unique: true
   end
 
+  create_table "time_entries", id: :uuid, force: :cascade do |t|
+    t.uuid "account_id", null: false
+    t.uuid "board_id", null: false
+    t.uuid "card_id"
+    t.datetime "created_at", null: false
+    t.text "description", limit: 65535, null: false
+    t.decimal "hours", precision: 6, scale: 2, null: false
+    t.datetime "updated_at", null: false
+    t.uuid "user_id", null: false
+    t.index ["account_id"], name: "index_time_entries_on_account_id"
+    t.index ["board_id"], name: "index_time_entries_on_board_id"
+    t.index ["card_id"], name: "index_time_entries_on_card_id"
+    t.index ["created_at"], name: "index_time_entries_on_created_at"
+    t.index ["user_id"], name: "index_time_entries_on_user_id"
+  end
+
   create_table "user_settings", id: :uuid, force: :cascade do |t|
     t.uuid "account_id", null: false
     t.integer "bundle_email_frequency", default: 0, null: false
