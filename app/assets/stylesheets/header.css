@@ -44,6 +44,17 @@
     inline-size: var(--header-actions-width);
   }
 
+  .header__action-badge {
+    background-color: var(--color-ink-lightest);
+    border-radius: 99rem;
+    color: var(--color-ink);
+    font-size: var(--text-x-small);
+    font-weight: 700;
+    line-height: 1;
+    margin-inline-start: 0.4ch;
+    padding: 0.1em 0.5em;
+  }
+
   .header__actions--start {
     grid-area: actions-start;
     margin-inline-end: auto;
